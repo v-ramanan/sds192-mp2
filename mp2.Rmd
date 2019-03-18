@@ -1,23 +1,7 @@
 ---
-title: "Mini-Project 2"
-author: "Your Name Here"
-date: "2019-03-24"
-output: 
-  html_document:
-    code_folding: show
+title: "Mini Project 2"
+author: "Vatsala"
+date: "3/8/2019"
+output: html_document
 ---
 
-
-## Loading the data
-
-This project is so interesting and relevant to my life!
-
-```{r, message=FALSE}
-library(tidyverse)
-load("house_elections.rda")
-load("candidates.rda")
-load("committees.rda")
-load("contributions.rda")
-```
-
-> Word count: `r wordcountaddin::word_count()`
