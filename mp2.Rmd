@@ -31,6 +31,8 @@ join_df
 
 creating a new data frame that selects only the variable we want and filtering by new york, texas, and florida
 
+note that we keep all three columns of voting because they all matter. 
+
 ```{r}
 fec_df<- join_df %>%
       select(state, candidate_name, party, primary_votes,runoff_votes, general_votes, incumbent, cmte_name)%>%
