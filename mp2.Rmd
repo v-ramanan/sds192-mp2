@@ -34,9 +34,19 @@ fec_df
 
 
 ```{r}
-cont <- contributions %>%
-  select(name)
+cont_1 <- contributions %>%
+  select(name,transaction_amt)%>%
+  filter(transaction_amt < 0)
 ```
+
+```{r}
+cont_2 <- contributions %>%
+  select(name,transaction_amt)%>%
+  filter(transaction_amt > 0)
+
+```
+
+
 
 ```{r}
 cont_join <- fec_df %>%
