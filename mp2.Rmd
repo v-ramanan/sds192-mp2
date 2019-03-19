@@ -55,13 +55,15 @@ cont_pos
 joining the negative contributions to the data set from before that contained housing elections and committees.  
 ```{r}
 cont_neg_join <- fec_df %>%
-    left_join(cont_neg, by = c("cmte_name" = "name"))
+    left_join(cont_neg, by = c("cmte_name" = "name"))%>%
+  filter(!is.na(transaction_amt))
 cont_neg_join
 ```
 make another data frame like above but for positive contributions
 ```{r}
 cont_pos_join <- fec_df %>%
-  left_join(cont_pos, by = c("cmte_name" = "name"))
+  left_join(cont_pos, by = c("cmte_name" = "name"))%>%
+    filter(!is.na(transaction_amt))
 cont_pos_join
 ```
   
