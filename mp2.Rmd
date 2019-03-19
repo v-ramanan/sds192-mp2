@@ -24,9 +24,14 @@ join_df
 
 ```{r}
 fec_df<- join_df %>%
+<<<<<<< HEAD
       select(state, candidate_name, party, primary_votes, ge_winner, incumbent, cmte_name) %>%
       filter(transaction_amt > 0, state== c("NY", "TX", "FL"))
 
+=======
+      select(state, candidate_name, party, primary_votes, ge_winner, incumbent, cmte_name)%>%
+   filter(state== c("NY", "TX", "FL"))
+>>>>>>> 231f9ad58b526ce8f611729440cf1fe2a2b5bd45
 fec_df
 ```
 
