@@ -24,7 +24,8 @@ join_df
 
 ```{r}
 fec_df<- join_df %>%
-      select(state, candidate_name, party, primary_votes, ge_winner, incumbent, cmte_name)
+      select(state, candidate_name, party, primary_votes, ge_winner, incumbent, cmte_name) %>%
+      filter(transaction_amt > 0, state== c("NY", "TX", "FL"))
 
 fec_df
 ```
@@ -45,13 +46,13 @@ cont_pos
 ```
 
 ```{r}
-cont_neg_join <- fec_df %>%
+cont_neg_join <- cont_neg %>%
     left_join(cont_neg, by = c("cmte_name" = "name"))
 cont_neg_join
 ```
 
 ```{r}
-cont_pos_join <- fec_df %>%
+cont_pos_join <- cont_pos %>%
   left_join(cont_pos, by = c("cmte_name" = "name"))
 cont_pos_join
 ```
