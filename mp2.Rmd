@@ -31,29 +31,29 @@ fec_df
 
 
 ```{r}
-cont_1 <- contributions %>%
+cont_neg <- contributions %>%
   select(name,transaction_amt, state)%>%
   filter(transaction_amt < 0, state== c("NY", "TX", "FL"))
-cont_1
+cont_neg
 ```
 
 ```{r}
-cont_2 <- contributions %>%
+cont_pos <- contributions %>%
   select(name,transaction_amt, state)%>%
   filter(transaction_amt > 0, state== c("NY", "TX", "FL"))
-cont_2
+cont_neg
 ```
 
 ```{r}
-cont_1_join <- fec_df %>%
-    left_join(cont_1, by = c("cmte_name" = "name"))
-cont_1_join
+cont_neg_join <- fec_df %>%
+    left_join(cont_neg, by = c("cmte_name" = "name"))
+cont_neg_join
 ```
 
 ```{r}
-cont_2_join <- fec_df %>%
-  left_join(cont_2, by = c("cmte_name" = "name"))
-cont_2_join
+cont_pos_join <- fec_df %>%
+  left_join(cont_pos, by = c("cmte_name" = "name"))
+cont_pos_join
 ```
 
 
