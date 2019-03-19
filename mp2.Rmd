@@ -49,8 +49,14 @@ cont_2 <- contributions %>%
 
 
 ```{r}
-cont_join <- fec_df %>%
-  left_join(cont, by = c("cmte_name" = "name"))
+cont_1_join <- fec_df %>%
+  left_join(cont_1, by = c("cmte_name" = "name"))
+cont_join
+```
+
+```{r}
+cont_2_join <- fec_df %>%
+  left_join(cont_2, by = c("cmte_name" = "name"))
 cont_join
 ```
 
