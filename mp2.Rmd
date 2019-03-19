@@ -14,6 +14,12 @@ load("contributions.rda")
 ```
 
 ```{r}
+join_df <- house_elections %>%
+              left_join(committees, by=c("state"= "cmte_state"))
+join_df
+```
+
+```{r}
 fec_df<- as.tbl(house_elections) %>%
       select(state, candidate_name, party, primary_votes, ge_winner)
 fec_df
