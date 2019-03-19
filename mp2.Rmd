@@ -1,6 +1,10 @@
 ---
 title: "Mini Project 2"
+<<<<<<< HEAD
 author: "Vatsala, Emma, Margaret"
+=======
+author: "Vatsala, "
+>>>>>>> 8f14c51dff36c95c9727f24fa84e93bbf3925d2f
 date: "3/8/2019"
 output: html_document
 ---
