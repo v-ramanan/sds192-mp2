@@ -6,6 +6,7 @@ output: html_document
 ---
 
 ```{r}
+library(tidyverse)
 load("house_elections.rda")
 load("candidates.rda")
 load("committees.rda")
@@ -13,6 +14,9 @@ load("contributions.rda")
 ```
 
 ```{r}
-View(candidates.rda)
+fec_df<- as.tbl(house_elections) %>%
+      select(state, candidate_name, party, primary_votes, ge_winner)
+fec_df
 ```
+
 
