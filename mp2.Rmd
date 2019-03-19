@@ -44,7 +44,7 @@ cont_neg
 cont_pos <- contributions %>%
   select(name,transaction_amt, state)%>%
   filter(transaction_amt > 0, state== c("NY", "TX", "FL"))
-cont_neg
+cont_pos
 ```
 
 ```{r}
