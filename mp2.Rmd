@@ -33,4 +33,15 @@ fec_df
 ```
 
 
+```{r}
+cont <- contributions %>%
+  select(name)
+```
+
+```{r}
+cont_join <- fec_df %>%
+  left_join(contributions, by = c("cmte_name" = "name"))
+cont_join
+```
+  
 
