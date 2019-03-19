@@ -28,7 +28,8 @@ join_df
 
 ```{r}
 fec_df<- join_df %>%
-      select(state, candidate_name, party, primary_votes, ge_winner, incumbent, cmte_name)
+      select(state, candidate_name, party, primary_votes, ge_winner, incumbent, cmte_name)%>%
+   filter(state== c("NY", "TX", "FL"))
 fec_df
 ```
 
