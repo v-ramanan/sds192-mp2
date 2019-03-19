@@ -33,7 +33,7 @@ creating a new data frame that selects only the variable we want and filtering b
 
 ```{r}
 fec_df<- join_df %>%
-      select(state, candidate_name, party, primary_votes, incumbent, cmte_name)%>%
+      select(state, candidate_name, party, primary_votes,runoff_votes, general_votes, incumbent, cmte_name)%>%
    filter(state== c("NY", "TX", "FL"))
 fec_df
 ```
