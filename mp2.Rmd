@@ -1,6 +1,6 @@
 ---
 title: "Mini Project 2"
-author: "Vatsala"
+author: "Vatsala, "
 date: "3/8/2019"
 output: html_document
 ---
