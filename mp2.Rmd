@@ -34,9 +34,3 @@ fec_df
 
 
 
-```{r}
-test <- house_elections %>%
-  filter(state == "MA")
-
-test
-```
