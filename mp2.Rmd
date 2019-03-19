@@ -40,7 +40,7 @@ cont <- contributions %>%
 
 ```{r}
 cont_join <- fec_df %>%
-  left_join(contributions, by = c("cmte_name" = "name"))
+  left_join(cont, by = c("cmte_name" = "name"))
 cont_join
 ```
   
