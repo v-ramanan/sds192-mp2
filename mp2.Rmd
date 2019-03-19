@@ -35,29 +35,28 @@ fec_df
 
 ```{r}
 cont_1 <- contributions %>%
-  select(name,transaction_amt)%>%
-  filter(transaction_amt < 0)
+  select(name,transaction_amt, state)%>%
+  filter(transaction_amt < 0, state== c("NY", "TX", "FL"))
+cont_1
 ```
 
 ```{r}
 cont_2 <- contributions %>%
-  select(name,transaction_amt)%>%
-  filter(transaction_amt > 0)
-
+  select(name,transaction_amt, state)%>%
+  filter(transaction_amt > 0, state== c("NY", "TX", "FL"))
+cont_2
 ```
-
-
 
 ```{r}
 cont_1_join <- fec_df %>%
-  left_join(cont_1, by = c("cmte_name" = "name"))
-cont_join
+    left_join(cont_1, by = c("cmte_name" = "name"))
+cont_1_join
 ```
 
 ```{r}
 cont_2_join <- fec_df %>%
   left_join(cont_2, by = c("cmte_name" = "name"))
-cont_join
+cont_2_join
 ```
   
 
