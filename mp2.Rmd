@@ -1,10 +1,6 @@
 ---
 title: "Mini Project 2"
-<<<<<<< HEAD
 author: "Vatsala, Emma, Margaret"
-=======
-author: "Vatsala"
->>>>>>> 8f14c51dff36c95c9727f24fa84e93bbf3925d2f
 date: "3/8/2019"
 output: html_document
 ---
@@ -21,7 +17,7 @@ load("contributions.rda")
 ```
 
 ```{r}
-join_df <- house_elections %>%
+join_df <- states %>%
               left_join(committees, by=c("state"= "cmte_state"))
 join_df
 ```
@@ -29,6 +25,7 @@ join_df
 ```{r}
 fec_df<- join_df %>%
       select(state, candidate_name, party, primary_votes, ge_winner, incumbent, cmte_name)
+
 fec_df
 ```
 
