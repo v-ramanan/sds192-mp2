@@ -28,7 +28,7 @@ join_df
 
 ```{r}
 fec_df<- house_elections %>%
-      select(state, candidate_name, party, primary_votes, ge_winner)
+      select(state, candidate_name, party, primary_votes, ge_winner, incumbent, cmte_name)
 fec_df
 ```
 
