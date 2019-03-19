@@ -16,11 +16,16 @@ load("committees.rda")
 load("contributions.rda")
 ```
 
+
+joining house elections and committees data frames by their common variable, the states and naming the new data frame
+
 ```{r}
 join_df <- house_elections %>%
               left_join(committees, by=c("state"= "cmte_state"))
 join_df
 ```
+
+creating a new data frame that selects only the variable we want and filtering by new york, texas, and florida
 
 ```{r}
 fec_df<- join_df %>%
@@ -30,27 +35,27 @@ fec_df<- join_df %>%
 fec_df
 ```
 
-
+making a data frame from contributions that only contains negative contributions and filtering for ny, tx, and fl
 ```{r}
 cont_neg <- contributions %>%
   select(name,transaction_amt, state)%>%
   filter(transaction_amt < 0, state== c("NY", "TX", "FL"))
 cont_neg
 ```
-
+ doing the same as above but for positive contributions
 ```{r}
 cont_pos <- contributions %>%
   select(name,transaction_amt, state)%>%
   filter(transaction_amt > 0, state== c("NY", "TX", "FL"))
 cont_pos
 ```
-
+joining the negative contributions to the data set from before that contained housing elections and committees.  
 ```{r}
 cont_neg_join <- cont_neg %>%
     left_join(cont_neg, by = c("cmte_name" = "name"))
 cont_neg_join
 ```
-
+make another data frame like above but for positive contributions
 ```{r}
 cont_pos_join <- cont_pos %>%
   left_join(cont_pos, by = c("cmte_name" = "name"))
