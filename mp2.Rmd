@@ -17,7 +17,7 @@ load("contributions.rda")
 ```
 
 ```{r}
-join_df <- states %>%
+join_df <- house_elections %>%
               left_join(committees, by=c("state"= "cmte_state"))
 join_df
 ```
