@@ -31,18 +31,9 @@ note that we keep all three columns of voting because they all matter.
 
 ```{r}
 fec_df<- join_df %>%
-<<<<<<< HEAD
-<<<<<<< HEAD
       select(state, candidate_name, party, primary_votes, ge_winner, incumbent, cmte_name) %>%
       filter(transaction_amt > 0, state== c("NY", "TX", "FL"))
 
-=======
-      select(state, candidate_name, party, primary_votes,runoff_votes, general_votes, incumbent, cmte_name)%>%
-=======
-      select(state, candidate_name, party, primary_votes,general_votes, incumbent, cmte_name)%>%
->>>>>>> e3d663a51dddb12c58b40f23d283cab5c30e2960
-   filter(state== c("NY", "TX", "FL"))
->>>>>>> e41b0feac849af915ac08fe02a60652a9fbb7938
 fec_df
 ```
 
@@ -65,7 +56,7 @@ we are looking at the total amount of money they got for them, not against their
 
 ```{r}
 cont_neg_join <- fec_df %>%
-    left_join(cont_neg, by = c("cmte_name" = "name"))%>%
+  left_join(cont_neg, by = c("cmte_name" = "name"))%>%
   filter(!is.na(transaction_amt))
 
 cont_neg_join
@@ -75,24 +66,23 @@ cont_neg_join
 cont_neg_final <- fec_df %>%
     left_join(cont_neg, by = c("cmte_name" = "name"))%>%
     filter(!is.na(transaction_amt), candidate_name == c("McCaul, Michael", "Cadien,Tawana W.", "Priest, Richard", "Brown, Corrine", "Kolb, LeAnne", "Fleming, Eileen", "Riggs, Bruce Ray", "Tonko, Paul D.", "Dieterich, Robert J."))
+
 cont_neg_final
 ```
 
 
 make another data frame like above but for positive contributions
+
 #```{r}
 cont_pos_join <- fec_df %>%
   left_join(cont_pos, by = c("cmte_name" = "name"))%>%
     filter(!is.na(transaction_amt))
 cont_pos_join
 ```
-<<<<<<< HEAD
-=======
+
   
 We picked the capital cities because in general it is reflective of the state's overall leanings. 
 Austin
 Tallahassee
-albany 
->>>>>>> 7d1efdd57718dcf896a0c0b9aee15644b03f4779
-
+albany
 
