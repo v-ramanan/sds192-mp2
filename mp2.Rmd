@@ -53,6 +53,17 @@ cont_pos
 joining the negative contributions to the data set from before that contained housing elections and committees.  
 we are looking at the total amount of money they got for them, not against their opponents. 
 
+
+```{r}
+cont_neg_final <- fec_df %>%
+    left_join(cont_neg, by = c("cmte_name" = "name"))%>%
+    filter(!is.na(transaction_amt), candidate_name %in% c("McCaul, Michael", "Cadien,Tawana W.", "Priest, Richard", "Brown, Corrine", "Kolb, LeAnne", "Fleming, Eileen", "Riggs, Bruce Ray", "Tonko, Paul D.", "Dieterich, Robert J.")) %>%
+  group_by(state.x) %>%
+  arrange(state.x)
+
+cont_neg_final
+```
+
 #```{r}
 cont_neg_join <- fec_df %>%
   left_join(cont_neg, by = c("cmte_name" = "name"))%>%
@@ -60,17 +71,6 @@ cont_neg_join <- fec_df %>%
 
 cont_neg_join
 ```
-
-```{r}
-cont_neg_final <- fec_df %>%
-    left_join(cont_neg, by = c("cmte_name" = "name"))%>%
-    filter(!is.na(transaction_amt), candidate_name == c("McCaul, Michael", "Cadien,Tawana W.", "Priest, Richard", "Brown, Corrine", "Kolb, LeAnne", "Fleming, Eileen", "Riggs, Bruce Ray", "Tonko, Paul D.", "Dieterich, Robert J.")) %>%
-  group_by(state.x) %>%
-  arrange(state.x)
-
-cont_neg_final
-```
-
 
 make another data frame like above but for positive contributions
 
