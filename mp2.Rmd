@@ -31,7 +31,7 @@ note that we keep all three columns of voting because they all matter.
 
 ```{r}
 fec_df<- join_df %>%
-      select(state, candidate_name, party, primary_votes, incumbent, cmte_name)
+      select(state, candidate_name, party, general_votes, incumbent, cmte_name)
 
 fec_df
 ```
