@@ -40,7 +40,7 @@ fec_df
 making a data frame from contributions that only contains negative contributions and filtering for ny, tx, and fl
 ```{r}
 cont_neg <- contributions %>%
-  select(name,transaction_amt, state)%>%
+  select(name, transaction_amt, state)%>%
   filter(transaction_amt < 0, state== c("NY", "TX", "FL"))
 cont_neg
 ```
