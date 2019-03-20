@@ -59,7 +59,7 @@ cont_neg_final <- fec_df %>%
     left_join(cont_neg, by = c("cmte_name" = "name"))%>%
     filter(!is.na(transaction_amt), candidate_name %in% c("McCaul, Michael", "Cadien,Tawana W.", "Priest, Richard", "Brown, Corrine", "Kolb, LeAnne", "Fleming, Eileen", "Riggs, Bruce Ray", "Tonko, Paul D.", "Dieterich, Robert J.")) %>%
   group_by(state.x) %>%
-  arrange(state.x)%>%
+  arrange(state.x)
   
  
 
