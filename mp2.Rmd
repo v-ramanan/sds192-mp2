@@ -35,7 +35,7 @@ note that we keep all three columns of voting because they all matter.
 
 ```{r}
 fec_df<- join_df %>%
-      select(state, candidate_name, party, primary_votes,runoff_votes, general_votes, incumbent, cmte_name)%>%
+      select(state, candidate_name, party, primary_votes,general_votes, incumbent, cmte_name)%>%
    filter(state== c("NY", "TX", "FL"))
 fec_df
 ```
