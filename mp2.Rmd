@@ -31,8 +31,9 @@ note that we keep all three columns of voting because they all matter.
 
 ```{r}
 fec_df<- join_df %>%
-      select(state, candidate_name, party, primary_votes, ge_winner, incumbent, cmte_name) %>%
-      filter(transaction_amt > 0, state== c("NY", "TX", "FL"))
+      select(state, candidate_name, party, primary_votes, incumbent, cmte_name) %>%
+  filter(transaction_amt > 0, state== c("NY", "TX", "FL"))
+      
 
 fec_df
 ```
@@ -40,7 +41,7 @@ fec_df
 making a data frame from contributions that only contains negative contributions and filtering for ny, tx, and fl
 ```{r}
 cont_neg <- contributions %>%
-  select(name, transaction_amt, state)%>%
+  select(name,transaction_amt, state)%>%
   filter(transaction_amt < 0, state== c("NY", "TX", "FL"))
 cont_neg
 ```
@@ -65,7 +66,9 @@ cont_neg_join
 ```{r}
 cont_neg_final <- fec_df %>%
     left_join(cont_neg, by = c("cmte_name" = "name"))%>%
-    filter(!is.na(transaction_amt), candidate_name == c("McCaul, Michael", "Cadien,Tawana W.", "Priest, Richard", "Brown, Corrine", "Kolb, LeAnne", "Fleming, Eileen", "Riggs, Bruce Ray", "Tonko, Paul D.", "Dieterich, Robert J."))
+    filter(!is.na(transaction_amt), candidate_name == c("McCaul, Michael", "Cadien,Tawana W.", "Priest, Richard", "Brown, Corrine", "Kolb, LeAnne", "Fleming, Eileen", "Riggs, Bruce Ray", "Tonko, Paul D.", "Dieterich, Robert J.")) %>%
+  group_by(state.x) %>%
+  arrange(state.x)
 
 cont_neg_final
 ```
