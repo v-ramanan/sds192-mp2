@@ -32,11 +32,15 @@ note that we keep all three columns of voting because they all matter.
 ```{r}
 fec_df<- join_df %>%
 <<<<<<< HEAD
+<<<<<<< HEAD
       select(state, candidate_name, party, primary_votes, ge_winner, incumbent, cmte_name) %>%
       filter(transaction_amt > 0, state== c("NY", "TX", "FL"))
 
 =======
       select(state, candidate_name, party, primary_votes,runoff_votes, general_votes, incumbent, cmte_name)%>%
+=======
+      select(state, candidate_name, party, primary_votes,general_votes, incumbent, cmte_name)%>%
+>>>>>>> e3d663a51dddb12c58b40f23d283cab5c30e2960
    filter(state== c("NY", "TX", "FL"))
 >>>>>>> e41b0feac849af915ac08fe02a60652a9fbb7938
 fec_df
