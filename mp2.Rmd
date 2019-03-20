@@ -57,6 +57,8 @@ cont_pos <- contributions %>%
 cont_pos
 ```
 joining the negative contributions to the data set from before that contained housing elections and committees.  
+we are looking at the total amount of money they got for them, not against their opponents. 
+
 ```{r}
 cont_neg_join <- fec_df %>%
     left_join(cont_neg, by = c("cmte_name" = "name"))%>%
@@ -64,12 +66,29 @@ cont_neg_join <- fec_df %>%
 
 cont_neg_join
 ```
-make another data frame like above but for positive contributions
+
 ```{r}
+cont_neg_final <- fec_df %>%
+    left_join(cont_neg, by = c("cmte_name" = "name"))%>%
+    filter(!is.na(transaction_amt), candidate_name == c("McCaul, Michael", "Cadien,Tawana W.", "Priest, Richard", "Brown, Corrine", "Kolb, LeAnne", "Fleming, Eileen", "Riggs, Bruce Ray", "Tonko, Paul D.", "Dieterich, Robert J."))
+cont_neg_final
+```
+
+
+make another data frame like above but for positive contributions
+#```{r}
 cont_pos_join <- fec_df %>%
   left_join(cont_pos, by = c("cmte_name" = "name"))%>%
     filter(!is.na(transaction_amt))
 cont_pos_join
 ```
+<<<<<<< HEAD
+=======
+  
+We picked the capital cities because in general it is reflective of the state's overall leanings. 
+Austin
+Tallahassee
+albany 
+>>>>>>> 7d1efdd57718dcf896a0c0b9aee15644b03f4779
 
 
