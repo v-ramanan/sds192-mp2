@@ -31,9 +31,7 @@ note that we keep all three columns of voting because they all matter.
 
 ```{r}
 fec_df<- join_df %>%
-      select(state, candidate_name, party, primary_votes, incumbent, cmte_name) %>%
-  filter(transaction_amt > 0, state== c("NY", "TX", "FL"))
-      
+      select(state, candidate_name, party, primary_votes, incumbent, cmte_name)
 
 fec_df
 ```
@@ -55,7 +53,7 @@ cont_pos
 joining the negative contributions to the data set from before that contained housing elections and committees.  
 we are looking at the total amount of money they got for them, not against their opponents. 
 
-```{r}
+#```{r}
 cont_neg_join <- fec_df %>%
   left_join(cont_neg, by = c("cmte_name" = "name"))%>%
   filter(!is.na(transaction_amt))
