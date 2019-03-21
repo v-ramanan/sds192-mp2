@@ -40,7 +40,7 @@ making a data frame from contributions that only contains negative contributions
 ```{r}
 cont_neg <- contributions %>%
   select(name,transaction_amt,transaction_type, state)%>%
-  filter(transaction_amt >0, transaction_type==c("24E", "24A"))
+  filter(transaction_amt >0)
 cont_neg
 ```
  doing the same as above but for positive contributions
@@ -66,7 +66,6 @@ edited_table
 ```
 
 ```{r}
-
 sum_money<-cont_neg_final%>%
   group_by(cmte_name)%>%
   summarize( sum_money = sum(transaction_amt))
@@ -76,9 +75,14 @@ sum_money
 ```{r}
 neg_money<- cont_neg_final%>%
   left_join(sum_money, by = "cmte_name")%>%
-  filter(state.x=="FL")%>%
-  group_by(party)
+  filter(transaction_type==c("24E", "24A"), candidate_name==c("Young, C.W . Bill", "Buchanan, Vern","Tonko, Paul D.", "Maloney, Carolyn B.", "Heaster, Dave"))
+
+neg_money
 ```
+
+
+
+
 
 
 
@@ -98,7 +102,6 @@ cont_pos_join <- fec_df %>%
     filter(!is.na(transaction_amt))
 cont_pos_join
 ```
-
   
 We picked the capital cities because in general it is reflective of the state's overall leanings. 
 Austin
@@ -113,4 +116,16 @@ cont_pos
 ```
 joining the negative contributions to the data set from before that contained housing elections and committees.  
 we are looking at the total amount of money they got for them, not against their opponents. 
+
+Young, C.W . Bill FL
+Buchanan, Vern
+
+Tonko, Paul D. NY
+Maloney, Carolyn B.
+
+Heaster, Dave WI
+Boland, Ray
+
+
+, candidate_name==c("Young, C.W . Bill", "Buchanan, Vern", "Tonko, Paul D.", "Maloney, Carolyn B.", "Heaster, Dave", "Boland, Ray"))
 
