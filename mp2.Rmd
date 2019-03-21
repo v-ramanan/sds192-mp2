@@ -75,7 +75,8 @@ sum_money
 ```{r}
 neg_money<- cont_neg_final%>%
   left_join(sum_money, by = "cmte_name")%>%
-  filter(transaction_type==c("24E", "24A"), candidate_name %in% c("Young, C.W . Bill", "Buchanan, Vern","Tonko, Paul D.", "Maloney, Carolyn B.", "Heaster, Dave"))
+  filter(transaction_type==c("24E", "24A"), candidate_name %in% c("Young, C.W . Bill", "Buchanan, Vern","Tonko, Paul D.", "Maloney, Carolyn B.", "Heaster, Dave"))%>%
+  select(state.x, candidate_name, party, general_votes, incumbent, cmte_name, transaction_amt, transaction_type, sum_money)
 
 neg_money
 ```
