@@ -48,7 +48,7 @@ cont_neg
 ```{r}
 cont_neg_final <- fec_df %>%
     left_join(cont_neg, by = c("cmte_name" = "name"))%>%
-    filter(!is.na(transaction_amt), candidate_name %in% c("McCaul, Michael", "Cadien,Tawana W.", "Priest, Richard", "Brown, Corrine", "Kolb, LeAnne", "Fleming, Eileen", "Riggs, Bruce Ray", "Tonko, Paul D.", "Dieterich, Robert J.")) %>%
+    filter(!is.na(transaction_amt)) %>%
   group_by(state.x) %>%
   arrange(state.x)
 <<<<<<< HEAD
@@ -78,7 +78,9 @@ sum_money
 
 ```{r}
 neg_money<- cont_neg_final%>%
-  left_join(sum_money, by = "cmte_name")
+  left_join(sum_money, by = "cmte_name")%>%
+  filter(state.x=="FL")%>%
+  group_by(party)
 ```
 
 
