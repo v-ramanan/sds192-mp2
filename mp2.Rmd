@@ -19,38 +19,33 @@ load("contributions.rda")
 ```
 
 
-joining house elections and committees data frames by their common variable, the states and naming the new data frame
-
-```{r message = FALSE, echo = FALSE, warning = FALSE}
+```{r message = FALSE, echo = FALSE, warning = FALSE, results='hide'}
 join_df <- house_elections %>%
               left_join(committees, by=c("state"= "cmte_state"))
 join_df
 ```
 
-creating a new data frame that selects only the variable we want and filtering by new york, texas, and florida
 
-note that we keep all three columns of voting because they all matter. 
-
-```{r message = FALSE, echo = FALSE, warning = FALSE}
+```{r message = FALSE, echo = FALSE, warning = FALSE,results='hide'}
 fec_df<- join_df %>%
       select(state, candidate_name, party, general_votes, incumbent, cmte_name)
 
 fec_df
 ```
 
-making a data frame from contributions that only contains negative contributions and filtering for ny, tx, and fl
-```{r message = FALSE, echo = FALSE, warning = FALSE}
+
+```{r message = FALSE, echo = FALSE, warning = FALSE, results='hide'}
 contributions_df <- contributions %>%
   select(name,transaction_amt,transaction_type, state)%>%
   filter(transaction_amt >0)
 
 contributions_df
 ```
- doing the same as above but for positive contributions
 
-```{r message = FALSE, echo = FALSE, warning = FALSE}
+
+```{r message = FALSE, echo = FALSE, warning = FALSE, results='hide'}
 contributions_fec <- fec_df %>%
-    left_join(cont_neg, by = c("cmte_name" = "name"))%>%
+    left_join(contributions_df, by = c("cmte_name" = "name"))%>%
     filter(!is.na(transaction_amt)) %>%
   group_by(state.x) %>%
   arrange(state.x)
@@ -59,7 +54,7 @@ contributions_fec
 ```
 
 
-```{r message = FALSE, echo = FALSE, warning = FALSE}
+```{r message = FALSE, echo = FALSE, warning = FALSE, results='hide'}
 sum_money<- contributions_fec %>%
   group_by(cmte_name) %>%
   summarize( sum_money = sum(transaction_amt))
@@ -80,7 +75,6 @@ donations_df <- contributions_fec %>%
 donations_df
 ```
 
-
 ```{r message = FALSE, echo = FALSE, warning = FALSE}
 general_votes_df <- contributions_fec %>%
   left_join(sum_money, by = "cmte_name") %>%
@@ -98,73 +92,7 @@ donations_plot
 ```
 
 ```{r message = FALSE, echo = FALSE, warning = FALSE}
-general_votes_plot <- ggplot(neg_money_2, aes(x = party, y = general_votes)) + geom_col(position = position_dodge())
+general_votes_plot <- ggplot(general_votes_df, aes(x = party, y = general_votes)) + geom_col(position = position_dodge())
 
 general_votes_plot
 ```
-
-
-#```{r}
-incumbent_plot <- ggplot(win_lose, aes(x = party, y = general_votes, fill = incumbent) + geom_col(position = position_dodge()))
-                                                                                     
-incumbent_plot
-```
-
-
-
-#```{r}
-win_lose <- contributions_fec %>%
-  left_join(sum_money, by = "cmte_name") %>%
-  filter(transaction_type== c("24A", "24E"), state.x == "NY") %>%
-  select(party, incumbent) %>%
-  summarise(N=n_distinct(), winners= sum(N))
-
-
-win_lose
-```
-
-
-
-#```{r}
-cont_neg_join <- fec_df %>%
-  left_join(cont_neg, by = c("cmte_name" = "name"))%>%
-  filter(!is.na(transaction_amt))
-
-cont_neg_join
-```
-
-make another data frame like above but for positive contributions
-
-#```{r}
-cont_pos_join <- fec_df %>%
-  left_join(cont_pos, by = c("cmte_name" = "name"))%>%
-    filter(!is.na(transaction_amt))
-cont_pos_join
-```
-  
-We picked the capital cities because in general it is reflective of the state's overall leanings. 
-Austin
-Tallahassee
-albany
-
-#```{r}
-cont_pos <- contributions %>%
-  select(name,transaction_amt, state)%>%
-  filter(transaction_amt == "24A", state== c("NY", "TX", "FL"))
-cont_pos
-```
-joining the negative contributions to the data set from before that contained housing elections and committees.  
-we are looking at the total amount of money they got for them, not against their opponents. 
-
-Young, C.W . Bill FL
-Buchanan, Vern
-
-Tonko, Paul D. NY
-Maloney, Carolyn B.
-
-Heaster, Dave WI
-Boland, Ray
-
-
-, candidate_name==c("Young, C.W . Bill", "Buchanan, Vern", "Tonko, Paul D.", "Maloney, Carolyn B.", "Heaster, Dave", "Boland, Ray"))
-
