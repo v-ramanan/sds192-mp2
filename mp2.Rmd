@@ -75,16 +75,50 @@ sum_money
 ```{r}
 neg_money<- cont_neg_final%>%
   left_join(sum_money, by = "cmte_name")%>%
-  filter(transaction_type==c("24E", "24A"), candidate_name %in% c("Young, C.W . Bill", "Buchanan, Vern","Tonko, Paul D.", "Maloney, Carolyn B.", "Heaster, Dave"))%>%
-  select(state.x, candidate_name, party, general_votes, incumbent, cmte_name, transaction_amt, transaction_type, sum_money)
+  filter(transaction_type==c("24E", "24A"), state.x == "NY")%>%
+  select(state.x, candidate_name, party, general_votes, incumbent, transaction_type, sum_money)%>%
+  group_by(transaction_type, party)%>%
+  summarise(new_sum=sum(sum_money))
 
 neg_money
+```
+
+```{r}
+money_plot <- ggplot(neg_money, aes(x = party, y = new_sum, fill = transaction_type))+
+  geom_col(position = position_dodge())
+money_plot
+
+```
+
+```{r}
+neg_money_2 <- cont_neg_final %>%
+  left_join(sum_money, by = "cmte_name") %>%
+  filter(transaction_type== c("24A", "24E"), state.x == "NY") %>%
+  select(state.x, party, general_votes, incumbent, candidate_name, cmte_name, transaction_amt, transaction_type, sum_money)
+
+neg_money_2
+```
+
+```{r}
+library(ggplot2)
+```
+
+```{r}
+gen_votes_plot <- ggplot(neg_money_2, aes(x = party, y = general_votes, fill = transaction_type)) + geom_col(position = position_dodge())
+
+gen_votes_plot
 ```
 
 
 
 
 
+
+```{r}
+plot <- ggplot(neg_money, aes(x = party, y = general_votes, fill = transaction_type)) + geom_col(position = position_dodge())
+
+plot
+```
 
 
 #```{r}
