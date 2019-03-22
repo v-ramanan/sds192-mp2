@@ -97,13 +97,13 @@ donations_plot
 ```
 
 ```{r}
-general_votes_plot <- ggplot(neg_money_2, aes(x = party, y = general_votes, fill = transaction_type)) + geom_col(position = position_dodge())
+general_votes_plot <- ggplot(neg_money_2, aes(x = party, y = general_votes)) + geom_col(position = position_dodge())
 
 general_votes_plot
 ```
 
 
-```{r}
+#```{r}
 incumbent_plot <- ggplot(win_lose, aes(x = party, y = general_votes, fill = incumbent) + geom_col(position = position_dodge()))
                                                                                      
 incumbent_plot
@@ -111,7 +111,7 @@ incumbent_plot
 
 
 
-```{r}
+#```{r}
 win_lose <- contributions_fec %>%
   left_join(sum_money, by = "cmte_name") %>%
   filter(transaction_type== c("24A", "24E"), state.x == "NY") %>%
