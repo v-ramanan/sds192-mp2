@@ -3,14 +3,15 @@ title: "Mini Project 2"
 author: "Vatsala, Emma, Margaret"
 date: "3/8/2019"
 output: html_document
+code_folding: hide
 ---
 
-```{r}
+```{r message = FALSE, echo = FALSE, warning = FALSE}
 library(tidyverse)
 library(ggplot2)
 ```
 
-```{r}
+```{r message = FALSE, echo = FALSE, warning = FALSE}
 load("house_elections.rda")
 load("candidates.rda")
 load("committees.rda")
@@ -20,7 +21,7 @@ load("contributions.rda")
 
 joining house elections and committees data frames by their common variable, the states and naming the new data frame
 
-```{r}
+```{r message = FALSE, echo = FALSE, warning = FALSE}
 join_df <- house_elections %>%
               left_join(committees, by=c("state"= "cmte_state"))
 join_df
@@ -30,7 +31,7 @@ creating a new data frame that selects only the variable we want and filtering b
 
 note that we keep all three columns of voting because they all matter. 
 
-```{r}
+```{r message = FALSE, echo = FALSE, warning = FALSE}
 fec_df<- join_df %>%
       select(state, candidate_name, party, general_votes, incumbent, cmte_name)
 
@@ -38,7 +39,7 @@ fec_df
 ```
 
 making a data frame from contributions that only contains negative contributions and filtering for ny, tx, and fl
-```{r}
+```{r message = FALSE, echo = FALSE, warning = FALSE}
 contributions_df <- contributions %>%
   select(name,transaction_amt,transaction_type, state)%>%
   filter(transaction_amt >0)
@@ -47,7 +48,7 @@ contributions_df
 ```
  doing the same as above but for positive contributions
 
-```{r}
+```{r message = FALSE, echo = FALSE, warning = FALSE}
 contributions_fec <- fec_df %>%
     left_join(cont_neg, by = c("cmte_name" = "name"))%>%
     filter(!is.na(transaction_amt)) %>%
@@ -58,7 +59,7 @@ contributions_fec
 ```
 
 
-```{r}
+```{r message = FALSE, echo = FALSE, warning = FALSE}
 sum_money<- contributions_fec %>%
   group_by(cmte_name) %>%
   summarize( sum_money = sum(transaction_amt))
@@ -68,7 +69,7 @@ sum_money
 
 
 
-```{r} 
+```{r message = FALSE, echo = FALSE, warning = FALSE} 
 donations_df <- contributions_fec %>%
   left_join(sum_money, by = "cmte_name")%>%
   filter(transaction_type==c("24E", "24A"), state.x == "NY")%>%
@@ -80,7 +81,7 @@ donations_df
 ```
 
 
-```{r}
+```{r message = FALSE, echo = FALSE, warning = FALSE}
 general_votes_df <- contributions_fec %>%
   left_join(sum_money, by = "cmte_name") %>%
   filter(transaction_type== c("24A", "24E"), state.x == "NY") %>%
@@ -89,14 +90,14 @@ general_votes_df <- contributions_fec %>%
 general_votes_df
 ```
 
-```{r}
+```{r message = FALSE, echo = FALSE, warning = FALSE}
 donations_plot <- ggplot(donations_df, aes(x = party, y = new_sum, fill = transaction_type))+
   geom_col(position = position_dodge())
 
 donations_plot
 ```
 
-```{r}
+```{r message = FALSE, echo = FALSE, warning = FALSE}
 general_votes_plot <- ggplot(neg_money_2, aes(x = party, y = general_votes)) + geom_col(position = position_dodge())
 
 general_votes_plot
