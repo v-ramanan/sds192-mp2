@@ -63,6 +63,14 @@ sum_money
 ```
 
 
+```{r message = FALSE, echo = FALSE, warning = FALSE}
+general_votes_df <- contributions_fec %>%
+  left_join(sum_money, by = "cmte_name") %>%
+  filter(transaction_type== c("24A", "24E"), state.x == "NY") %>%
+  select(state.x, party, general_votes, incumbent, candidate_name, cmte_name, transaction_amt, transaction_type, sum_money)
+
+general_votes_df
+```
 
 ```{r message = FALSE, echo = FALSE, warning = FALSE} 
 donations_df <- contributions_fec %>%
@@ -76,13 +84,11 @@ donations_df
 ```
 
 ```{r message = FALSE, echo = FALSE, warning = FALSE}
-general_votes_df <- contributions_fec %>%
-  left_join(sum_money, by = "cmte_name") %>%
-  filter(transaction_type== c("24A", "24E"), state.x == "NY") %>%
-  select(state.x, party, general_votes, incumbent, candidate_name, cmte_name, transaction_amt, transaction_type, sum_money)
+general_votes_plot <- ggplot(general_votes_df, aes(x = party, y = general_votes)) + geom_col(position = position_dodge())
 
-general_votes_df
+general_votes_plot
 ```
+
 
 ```{r message = FALSE, echo = FALSE, warning = FALSE}
 donations_plot <- ggplot(donations_df, aes(x = party, y = new_sum, fill = transaction_type))+
@@ -91,8 +97,3 @@ donations_plot <- ggplot(donations_df, aes(x = party, y = new_sum, fill = transa
 donations_plot
 ```
 
-```{r message = FALSE, echo = FALSE, warning = FALSE}
-general_votes_plot <- ggplot(general_votes_df, aes(x = party, y = general_votes)) + geom_col(position = position_dodge())
-
-general_votes_plot
-```
