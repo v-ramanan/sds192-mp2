@@ -76,17 +76,35 @@ sum_money
 ```
 
 ```{r}
-neg_money<- cont_neg_final%>%
-  left_join(sum_money, by = "cmte_name")%>%
-  filter(transaction_type==c("24E", "24A"), candidate_name %in% c("Young, C.W . Bill", "Buchanan, Vern","Tonko, Paul D.", "Maloney, Carolyn B.", "Heaster, Dave"))%>%
-  select(state.x, candidate_name, party, general_votes, incumbent, cmte_name, transaction_amt, transaction_type, sum_money)
+win_lose <- cont_neg_final %>%
+  left_join(sum_money, by = "cmte_name") %>%
+  filter(transaction_type== c("24A", "24E"), state.x == "NY") %>%
+  select(party, incumbent, transaction_type) %>%
+  group_by(party, transaction_type) %>%
+  summarize(N = n(), 
+            total = sum(n), 
+            boys = sum(ifelse(sex == "M", n, 0)))
+ 
 
-neg_money
+win_lose
+```
+
+```{r}
+library(ggplot2)
+```
+
+```{r}
+gen_votes_plot <- ggplot(neg_money_2, aes(x = party, y = general_votes, fill = transaction_type)) + geom_col(position = position_dodge())
+
+gen_votes_plot
 ```
 
 
-
-
+```{r}
+incumbent_plot <- ggplot(win_lose, aes(x = party, y = , fill = transaction_type) + geom_col(position = position_dodge()))
+                                                                                     
+incumbent_plot
+```
 
 
 
