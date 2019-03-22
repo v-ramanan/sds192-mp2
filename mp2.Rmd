@@ -7,6 +7,7 @@ output: html_document
 
 ```{r}
 library(tidyverse)
+library(ggplot2)
 ```
 
 ```{r}
@@ -38,110 +39,90 @@ fec_df
 
 making a data frame from contributions that only contains negative contributions and filtering for ny, tx, and fl
 ```{r}
-cont_neg <- contributions %>%
+contributions_df <- contributions %>%
   select(name,transaction_amt,transaction_type, state)%>%
   filter(transaction_amt >0)
-cont_neg
+
+contributions_df
 ```
  doing the same as above but for positive contributions
 
 ```{r}
-cont_neg_final <- fec_df %>%
+contributions_fec <- fec_df %>%
     left_join(cont_neg, by = c("cmte_name" = "name"))%>%
     filter(!is.na(transaction_amt)) %>%
   group_by(state.x) %>%
   arrange(state.x)
 
-cont_neg_final
+contributions_fec
 ```
 
 
 ```{r}
- edited_table<-cont_neg_final %>%
-               select(state.x, candidate_name, party, general_votes, incumbent)
-edited_table
-```
-
-```{r}
-sum_money<-cont_neg_final%>%
-  group_by(cmte_name)%>%
+sum_money<- contributions_fec %>%
+  group_by(cmte_name) %>%
   summarize( sum_money = sum(transaction_amt))
+
 sum_money
 ```
 
-```{r}
-win_lose <- cont_neg_final %>%
-  left_join(sum_money, by = "cmte_name") %>%
-  filter(transaction_type== c("24A", "24E"), state.x == "NY") %>%
-  select(party, incumbent, transaction_type) %>%
-  group_by(party, transaction_type) %>%
-  summarize(N = n(), 
-            total = sum(n), 
-            boys = sum(ifelse(sex == "M", n, 0)))
- 
-
-win_lose
-```
 
 
 ```{r} 
-neg_money<- cont_neg_final%>%
+donations_df <- contributions_fec %>%
   left_join(sum_money, by = "cmte_name")%>%
   filter(transaction_type==c("24E", "24A"), state.x == "NY")%>%
   select(state.x, candidate_name, party, general_votes, incumbent, transaction_type, sum_money)%>%
   group_by(transaction_type, party)%>%
   summarise(new_sum=sum(sum_money))
+
+donations_df
 ```
 
 
 ```{r}
-library(ggplot2)
-```
-
-```{r}
-gen_votes_plot <- ggplot(neg_money_2, aes(x = party, y = general_votes, fill = transaction_type)) + geom_col(position = position_dodge())
-
-gen_votes_plot
-
-money_plot <- ggplot(neg_money, aes(x = party, y = new_sum, fill = transaction_type))+
-  geom_col(position = position_dodge())
-money_plot
-
-```
-
-```{r}
-neg_money_2 <- cont_neg_final %>%
+general_votes_df <- contributions_fec %>%
   left_join(sum_money, by = "cmte_name") %>%
   filter(transaction_type== c("24A", "24E"), state.x == "NY") %>%
   select(state.x, party, general_votes, incumbent, candidate_name, cmte_name, transaction_amt, transaction_type, sum_money)
 
-neg_money_2
+general_votes_df
 ```
 
 ```{r}
-library(ggplot2)
+donations_plot <- ggplot(donations_df, aes(x = party, y = new_sum, fill = transaction_type))+
+  geom_col(position = position_dodge())
+
+donations_plot
 ```
 
 ```{r}
-incumbent_plot <- ggplot(win_lose, aes(x = party, y = , fill = transaction_type) + geom_col(position = position_dodge()))
+general_votes_plot <- ggplot(neg_money_2, aes(x = party, y = general_votes, fill = transaction_type)) + geom_col(position = position_dodge())
+
+general_votes_plot
+```
+
+
+```{r}
+incumbent_plot <- ggplot(win_lose, aes(x = party, y = general_votes, fill = incumbent) + geom_col(position = position_dodge()))
                                                                                      
 incumbent_plot
 ```
 
-```{r}
-gen_votes_plot <- ggplot(neg_money_2, aes(x = party, y = general_votes, fill = transaction_type)) + geom_col(position = position_dodge())
-
-gen_votes_plot
-```
 
 
 ```{r}
-win_lose <- cont_neg_final %>%  left_join(sum_money, by = "cmte_name") %>%  filter(transaction_type== c("24A", "24E"), state.x == "NY") %>%  select(party, incumbent, transaction_type) %>%  group_by(party, transaction_type) %>%  summarize(N = n(),            total = sum(n),            boys = sum(ifelse(sex == "M", n, 0))) win_lose
+win_lose <- contributions_fec %>%
+  left_join(sum_money, by = "cmte_name") %>%
+  filter(transaction_type== c("24A", "24E"), state.x == "NY") %>%
+  select(party, incumbent) %>%
+  summarise(N=n_distinct(), winners= sum(N))
+
+
+win_lose
 ```
 
-```{r}
-incumbent_plot <- ggplot(win_lose, aes(x = party, y = , fill = transaction_type) + geom_col(position = position_dodge()))                                                                                     incumbent_plot
-```
+
 
 #```{r}
 cont_neg_join <- fec_df %>%
