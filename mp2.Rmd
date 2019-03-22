@@ -92,7 +92,8 @@ general_votes_plot
 
 ```{r message = FALSE, echo = FALSE, warning = FALSE}
 donations_plot <- ggplot(donations_df, aes(x = party, y = new_sum, fill = transaction_type))+
-  geom_col(position = position_dodge())
+  geom_col(position = position_dodge())+
+  theme(legend.position = "top")
 
 donations_plot
 ```
