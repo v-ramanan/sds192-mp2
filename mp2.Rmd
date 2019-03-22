@@ -84,7 +84,7 @@ donations_df
 ```
 
 ```{r message = FALSE, echo = FALSE, warning = FALSE}
-general_votes_plot <- ggplot(general_votes_df, aes(x = party, y = general_votes)) + geom_col(position = position_dodge())
+general_votes_plot <- ggplot(general_votes_df, aes(x = party, y = general_votes)) + geom_col(position = position_dodge(), width=0.5)
 
 general_votes_plot
 ```
