@@ -91,7 +91,10 @@ donations_df
 ```
 
 ```{r message = FALSE, echo = FALSE, warning = FALSE}
-general_votes_plot <- ggplot(general_votes_df, aes(x = party, y = general_votes)) + geom_col(position = position_dodge(), width=0.5)
+general_votes_plot <- ggplot(general_votes_df, aes(x = party, y = general_votes)) + 
+  geom_col(position = position_dodge(), width=0.5)+
+   scale_x_discrete(label = c("Conservative","Democrat","Green", "Libertarian","Republican","Socialist", "Write In"))+
+  labs(title = "Total General Votes Each Party Received", x = "Party", y = "General Votes")
 
 general_votes_plot
 ```
@@ -99,7 +102,9 @@ general_votes_plot
 ```{r message = FALSE, echo = FALSE, warning = FALSE}
 donations_plot <- ggplot(donations_df, aes(x = party, y = new_sum, fill = transaction_type))+
   geom_col(position = position_dodge())+
-  theme(legend.position = "top")
+     scale_x_discrete(label = c("Conservative","Democrat","Green", "Libertarian","Republican","Socialist", "Write In"))+
+   scale_fill_manual(name="Transaction Type",values = c("#CC6666", "#9999CC"),labels=c("Money Used Against a party", "Money Used For a Party")) +theme(legend.position = "top")+
+  labs(title = "Amount of Money used for and Against each party", y = "Amount of Money", x = "Party")
 
 donations_plot
 ```
