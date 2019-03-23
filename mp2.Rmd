@@ -54,7 +54,7 @@ contributions_fec <- fec_df %>%
   arrange(state.x)
 
 contributions_fec
-# joining the contributions data frame and the fec data frame by name. We are filtering to remove the NA values and grouping by and arranging by state
+# joining the contributions data frame and the fec data frame by name. We are filtering to remove the NA values and grouping by and arranging by state.
 ```
 
 
