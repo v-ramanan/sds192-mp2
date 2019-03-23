@@ -97,3 +97,4 @@ donations_plot <- ggplot(donations_df, aes(x = party, y = new_sum, fill = transa
 donations_plot
 ```
 
+> Word count: `r wordcountaddin::word_count()`
