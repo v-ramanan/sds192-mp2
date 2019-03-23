@@ -23,6 +23,7 @@ load("contributions.rda")
 join_df <- house_elections %>%
               left_join(committees, by=c("state"= "cmte_state"))
 join_df
+# joining the house elections and committees dataframes to have candidates and the comittees who gave them money. We are joining by their common variable, state.
 ```
 
 
@@ -31,6 +32,7 @@ fec_df<- join_df %>%
       select(state, candidate_name, party, general_votes, incumbent, cmte_name)
 
 fec_df
+#selecting only the variables that we need from the previous data frame
 ```
 
 
@@ -40,6 +42,7 @@ contributions_df <- contributions %>%
   filter(transaction_amt >0)
 
 contributions_df
+# Selecting the useful variables from the contributions data frame and then filtering to only get contributions that werent returned. 
 ```
 
 
@@ -51,7 +54,9 @@ contributions_fec <- fec_df %>%
   arrange(state.x)
 
 contributions_fec
+# joining the contributions data frame and the fec data frame by name. We are filtering to remove the NA values and grouping by and arranging by state
 ```
+
 
 
 ```{r message = FALSE, echo = FALSE, warning = FALSE, results='hide'}
@@ -60,9 +65,11 @@ sum_money<- contributions_fec %>%
   summarize( sum_money = sum(transaction_amt))
 
 sum_money
+# finding the sum of each committees donations
 ```
 
 
+#Joining the data sets so we can have each candidate, their status of imcumbancy, the total amount of money they received from each committee, and the total amount of general votes they received. We are filtering so we have both how much money was used against the candidate and how much mone was used in their favor. We can use this to see each party and how many votes they received. 
 ```{r message = FALSE, echo = FALSE, warning = FALSE}
 general_votes_df <- contributions_fec %>%
   left_join(sum_money, by = "cmte_name") %>%
@@ -72,6 +79,7 @@ general_votes_df <- contributions_fec %>%
 general_votes_df
 ```
 
+# Doing the same thing as the data frame above but now groupnig by the transaction type. We want to see how much money was used both in favor of a party and against a party. 
 ```{r message = FALSE, echo = FALSE, warning = FALSE} 
 donations_df <- contributions_fec %>%
   left_join(sum_money, by = "cmte_name")%>%
@@ -84,15 +92,20 @@ donations_df
 ```
 
 ```{r message = FALSE, echo = FALSE, warning = FALSE}
-general_votes_plot <- ggplot(general_votes_df, aes(x = party, y = general_votes)) + geom_col(position = position_dodge(), width=0.5)
+general_votes_plot <- ggplot(general_votes_df, aes(x = party, y = general_votes)) + 
+  geom_col(position = position_dodge(), width=0.5)+
+   scale_x_discrete(label = c("Conservative","Democrat","Green", "Libertarian","Republican","Socialist", "Write In"))+
+  labs(title = "Total General Votes Each Party Received", x = "Party", y = "General Votes")
 
 general_votes_plot
 ```
 
-
 ```{r message = FALSE, echo = FALSE, warning = FALSE}
 donations_plot <- ggplot(donations_df, aes(x = party, y = new_sum, fill = transaction_type))+
-  geom_col(position = position_dodge())
+  geom_col(position = position_dodge())+
+     scale_x_discrete(label = c("Conservative","Democrat","Green", "Libertarian","Republican","Socialist", "Write In"))+
+   scale_fill_manual(name="Transaction Type",values = c("#CC6666", "#9999CC"),labels=c("Money Used Against a party", "Money Used For a Party")) +theme(legend.position = "top")+
+  labs(title = "Amount of Money used for and Against each party", y = "Amount of Money", x = "Party")
 
 donations_plot
 ```
