@@ -58,6 +58,7 @@ contributions_fec
 ```
 
 
+
 ```{r message = FALSE, echo = FALSE, warning = FALSE, results='hide'}
 sum_money<- contributions_fec %>%
   group_by(cmte_name) %>%
@@ -68,6 +69,7 @@ sum_money
 ```
 
 
+#Joining the data sets so we can have each candidate, their status of imcumbancy, the total amount of money they received from each committee, and the total amount of general votes they received. We are filtering so we have both how much money was used against the candidate and how much mone was used in their favor. We can use this to see each party and how many votes they received. 
 ```{r message = FALSE, echo = FALSE, warning = FALSE}
 general_votes_df <- contributions_fec %>%
   left_join(sum_money, by = "cmte_name") %>%
@@ -75,9 +77,9 @@ general_votes_df <- contributions_fec %>%
   select(state.x, party, general_votes, incumbent, candidate_name, cmte_name, transaction_amt, transaction_type, sum_money)
 
 general_votes_df
-#Joining the data sets so we can have each candidate, their status of imcumbancy, the total amount of money they received from each committee, and the total amount of general votes they received. We are filtering so we have both how much money was used against the candidate and how much mone was used in their favor. We can use this to see each party and how many votes they received. 
 ```
 
+# Doing the same thing as the data frame above but now groupnig by the transaction type. We want to see how much money was used both in favor of a party and against a party. 
 ```{r message = FALSE, echo = FALSE, warning = FALSE} 
 donations_df <- contributions_fec %>%
   left_join(sum_money, by = "cmte_name")%>%
@@ -87,7 +89,6 @@ donations_df <- contributions_fec %>%
   summarise(new_sum=sum(sum_money))
 
 donations_df
-#  doing basically the same thing as the data frame above but now groupnig by the transaction type. We want to see how much money was used both in favor of a party and against a party. 
 ```
 
 ```{r message = FALSE, echo = FALSE, warning = FALSE}
