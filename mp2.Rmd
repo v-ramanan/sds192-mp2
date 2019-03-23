@@ -73,7 +73,7 @@ sum_money
 ```{r message = FALSE, echo = FALSE, warning = FALSE}
 general_votes_df <- contributions_fec %>%
   left_join(sum_money, by = "cmte_name") %>%
-  filter(transaction_type== c("24A", "24E"), state.x == "NY") %>%
+  filter(transaction_type==c("24E", "24A"),state.x == "NY") %>%
   select(state.x, party, general_votes, incumbent, candidate_name, cmte_name, transaction_amt, transaction_type, sum_money)
 
 general_votes_df
@@ -115,4 +115,30 @@ donations_plot <- ggplot(donations_df, aes(x = party, y = new_sum, fill = transa
 
 donations_plot
 ```
+
+```{r message = FALSE, echo = FALSE, warning = FALSE}
+votes_function<- function(state_arg = "NY", money_arg1 = "24A",money_arg2 = "24E"){
+  general_votes_df <- contributions_fec %>%
+  left_join(sum_money, by = "cmte_name") %>%
+  filter(transaction_type== c(money_arg1, money_arg2), state.x == state_arg) %>%
+  select(state.x, party, general_votes, incumbent, candidate_name, cmte_name, transaction_amt, transaction_type, sum_money)
+  general_votes_df
+}
+# function to iterate over any state
+```
+
+```{r message = FALSE, echo = FALSE, warning = FALSE}
+money_function <- function(state_arg = "NY",money_arg1 = "24A",money_arg2 = "24E"){
+  donations_df <- contributions_fec %>%
+  left_join(sum_money, by = "cmte_name")%>%
+  filter(transaction_type==c(money_arg1, money_arg2), state.x == state_arg)%>%
+  select(state.x, candidate_name, party, general_votes, incumbent, transaction_type, sum_money)%>%
+  group_by(transaction_type, party)%>%
+  summarise(new_sum=sum(sum_money))
+
+donations_df
+}
+# function to iterate over any state or money type
+```
+
 
