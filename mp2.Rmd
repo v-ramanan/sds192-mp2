@@ -69,7 +69,7 @@ sum_money
 ```
 
 
-#Joining the data sets so we can have each candidate, their status of imcumbancy, the total amount of money they received from each committee, and the total amount of general votes they received. We are filtering so we have both how much money was used against the candidate and how much mone was used in their favor. We can use this to see each party and how many votes they received. 
+
 ```{r message = FALSE, echo = FALSE, warning = FALSE}
 general_votes_df <- contributions_fec %>%
   left_join(sum_money, by = "cmte_name") %>%
@@ -77,9 +77,10 @@ general_votes_df <- contributions_fec %>%
   select(state.x, party, general_votes, incumbent, candidate_name, cmte_name, transaction_amt, transaction_type, sum_money)
 
 general_votes_df
+#Joining the data sets so we can have each candidate, their status of imcumbancy, the total amount of money they received from each committee, and the total amount of general votes they received. We are filtering so we have both how much money was used against the candidate and how much mone was used in their favor. We can use this to see each party and how many votes they received. 
 ```
 
-# Doing the same thing as the data frame above but now groupnig by the transaction type. We want to see how much money was used both in favor of a party and against a party. 
+
 ```{r message = FALSE, echo = FALSE, warning = FALSE} 
 donations_df <- contributions_fec %>%
   left_join(sum_money, by = "cmte_name")%>%
@@ -89,13 +90,16 @@ donations_df <- contributions_fec %>%
   summarise(new_sum=sum(sum_money))
 
 donations_df
+# Doing the same thing as the data frame above but now groupnig by the transaction type. We want to see how much money was used both in favor of a party and against a party. 
 ```
 
 ```{r message = FALSE, echo = FALSE, warning = FALSE}
 general_votes_plot <- ggplot(general_votes_df, aes(x = party, y = general_votes)) + 
-  geom_col(position = position_dodge(), width=0.5)+
+  geom_col(position = position_dodge(), width=0.5,fill="#A4A4A4")+
    scale_x_discrete(label = c("Conservative","Democrat","Green", "Libertarian","Republican","Socialist", "Write In"))+
-  labs(title = "Total General Votes Each Party Received", x = "Party", y = "General Votes")
+  labs(title = "Total General Votes Each Party Received", x = "Party", y = "General Votes")+
+  theme_minimal()
+  
 
 general_votes_plot
 ```
@@ -104,8 +108,10 @@ general_votes_plot
 donations_plot <- ggplot(donations_df, aes(x = party, y = new_sum, fill = transaction_type))+
   geom_col(position = position_dodge())+
      scale_x_discrete(label = c("Conservative","Democrat","Green", "Libertarian","Republican","Socialist", "Write In"))+
-   scale_fill_manual(name="Transaction Type",values = c("#CC6666", "#9999CC"),labels=c("Money Used Against a party", "Money Used For a Party")) +theme(legend.position = "top")+
-  labs(title = "Amount of Money used for and Against each party", y = "Amount of Money", x = "Party")
+   scale_fill_manual(name="Transaction Type",values = c("#CC6666", "#9999CC"),labels=c("Money Used Against a Party", "Money Used For a Party"))+
+  theme_minimal()+
+  theme(legend.position = "top")+
+  labs(title = "Amount of Money used for and Against each Party", y = "Amount of Money", x = "Party")
 
 donations_plot
 ```
