@@ -108,7 +108,7 @@ general_votes_plot
 donations_plot <- ggplot(donations_df, aes(x = party, y = new_sum, fill = transaction_type))+
   geom_col(position = position_dodge())+
      scale_x_discrete(label = c("Conservative","Democrat","Green", "Libertarian","Republican","Socialist", "Write In"))+
-   scale_fill_manual(name="Transaction Type",values = c("#CC6666", "#9999CC"),labels=c("Money Used Against a Party", "Money Used For a Party"))+
+   scale_fill_manual(name="Transaction Type",values = c("#CC6666", "#9999CC"),labels=c("Donations made AGAINST a candidate", "Donations made FOR a candidate"))+
   theme_minimal()+
   theme(legend.position = "top")+
   labs(title = "Amount of Money used for and Against each Party", y = "Amount of Money", x = "Party")
