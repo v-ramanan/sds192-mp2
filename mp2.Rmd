@@ -116,7 +116,7 @@ donations_plot <- ggplot(donations_df, aes(x = party, y = new_sum, fill = transa
 donations_plot
 ```
 
-```{r message = FALSE, echo = FALSE, warning = FALSE}
+```{r message = FALSE, warning = FALSE}
 votes_function<- function(state_arg = "NY", money_arg1 = "24A",money_arg2 = "24E"){
   general_votes_df <- contributions_fec %>%
   left_join(sum_money, by = "cmte_name") %>%
@@ -127,8 +127,8 @@ votes_function<- function(state_arg = "NY", money_arg1 = "24A",money_arg2 = "24E
 # function to iterate over any state
 ```
 
-```{r message = FALSE, echo = FALSE, warning = FALSE}
-money_function <- function(state_arg = "NY",money_arg1 = "24A",money_arg2 = "24E"){
+```{r message = FALSE, warning = FALSE}
+donations_function <- function(state_arg = "NY",money_arg1 = "24A",money_arg2 = "24E"){
   donations_df <- contributions_fec %>%
   left_join(sum_money, by = "cmte_name")%>%
   filter(transaction_type==c(money_arg1, money_arg2), state.x == state_arg)%>%
@@ -138,7 +138,9 @@ money_function <- function(state_arg = "NY",money_arg1 = "24A",money_arg2 = "24E
 
 donations_df
 }
-# function to iterate over any state or money type
+# function to iterate over any state or donation/transaction type
 ```
+
+^[https://github.com/v-ramanan/sds192-mp2.git]
 
 
