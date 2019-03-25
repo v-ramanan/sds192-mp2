@@ -10,18 +10,18 @@ The US 2012 midterm elections took place at the same time President Barack Obama
 
 Hypothesis:
 1. 
-  + 1a It is expected that the Democrats will win the most number of votes in the general elections as New York is a historically blue state.
-  + 1b However, the margin of votes between the Republicans and Democrats would be small because political analysts note that support for the party in power often dwindles during a president’s second term (citation needed).
-  + 1c Libertarians and conservatives will garner more votes than other third parties because mainstream political media is more focused on them. 
+  a. It is expected that the Democrats will win the most number of votes in the general elections as New York is a historically blue state.
+  b. However, the margin of votes between the Republicans and Democrats would be small because political analysts note that support for the party in power often dwindles during a president’s second term (citation needed).
+  c. Libertarians and conservatives will garner more votes than other third parties because mainstream political media is more focused on them. 
 
 
 2. 
-  + 2a More donations will be made in favor of a candidate’s campaigns than against. 
-  + 2b The Democrats followed by the Republicans would have received the most money. 
+  a. More donations will be made in favor of a candidate’s campaigns than against. 
+  b. The Democrats followed by the Republicans would have received the most money. 
 
 
 3.
-  + 3a Finally, there will be a positive correlation between the amount of money candidates receive in donations to use in support of their campaign and the overall votes they garner. 
+  a. Finally, there will be a positive correlation between the amount of money candidates receive in donations to use in support of their campaign and the overall votes they garner. 
 
 ```{r message = FALSE, echo = FALSE, warning = FALSE}
 library(tidyverse)
@@ -168,18 +168,18 @@ devtools::install_github("benmarwick/wordcountaddin", type = "source", dependenc
 Analysis: 
 
 1. 
-  +a From the first graph we can see that the Democrats received the majority of votes in New York, followed by the Republicans. This was as hypothesised; New York is a historically Democratic state and, unless a major social, political or economic event occurs, it is expected to remain that way. Moreover, in 2012 almost half the registered voters were democrats(Wheaton).
-  +b It was also correctly hypothesised that the margin of votes between the Republicans and Democrats would not be that extensive. One can understand this occurrence by considering voter turnout. It must be noted that only the most passionate voters participate in midterm elections. In 2006, the most passionate and regular voter comprised 35% of voters (Pew Research Center). Fewer registered Democrats may have voted in 2012 because of a sense of confidence in the party’s success created by Obama’s presidential victory. However, history is also at play in this scenario. Since New York is a historically blue state, Republican voters who feel they are a minority in New York are more likely to vote in the midterm elections than more moderate Democrats (Pew Research Center).Therefore, Obama’s presidential victory may have caused a more Republican outcome of the midterms. 
-  +c It is interesting to note that that neither the Libertarians nor the Conservatives formed the largest third party; the Green party garnered the third most votes. Libertarians, in fact, received the least number of votes, despite more media focus on them, among all the  third parties, including that of the write-ins who were not even on the ballot. We also see that the Conservative party received the same number of votes as the Socialist party. This is surprising because it is generally thought that the Socialist party only wins votes in times of major socio-economic crisis, which was not the case in 2012 (Amadeo). 
+  a. From the first graph we can see that the Democrats received the majority of votes in New York, followed by the Republicans. This was as hypothesised; New York is a historically Democratic state and, unless a major social, political or economic event occurs, it is expected to remain that way. Moreover, in 2012 almost half the registered voters were democrats(Wheaton).
+  b. It was also correctly hypothesised that the margin of votes between the Republicans and Democrats would not be that extensive. One can understand this occurrence by considering voter turnout. It must be noted that only the most passionate voters participate in midterm elections. In 2006, the most passionate and regular voter comprised 35% of voters (Pew Research Center). Fewer registered Democrats may have voted in 2012 because of a sense of confidence in the party’s success created by Obama’s presidential victory. However, history is also at play in this scenario. Since New York is a historically blue state, Republican voters who feel they are a minority in New York are more likely to vote in the midterm elections than more moderate Democrats (Pew Research Center).Therefore, Obama’s presidential victory may have caused a more Republican outcome of the midterms. 
+  c. It is interesting to note that that neither the Libertarians nor the Conservatives formed the largest third party; the Green party garnered the third most votes. Libertarians, in fact, received the least number of votes, despite more media focus on them, among all the  third parties, including that of the write-ins who were not even on the ballot. We also see that the Conservative party received the same number of votes as the Socialist party. This is surprising because it is generally thought that the Socialist party only wins votes in times of major socio-economic crisis, which was not the case in 2012 (Amadeo). 
 
 
 2.
-  +a As was hypothesised, more money was donated in support of candidates than against as it would make more sense for individuals to fund those they support rather than donate to oppose another. What was interesting was that the same amount of money was donated against write-in candidates, who do not even appear on the ballot, as was against Conservatives and Libertarians suggesting that all three parties are considered equally threatening to donors of New York. 
-  +b The Democrats and Republicans received the greatest number of financial campaign contributions, as compared to other third parties. From this, more of the money was spent in support of candidates, rather than against them. This was as expected because, being the largest parties, the Democrats and Republicans would naturally receive the most money.
+  a. As was hypothesised, more money was donated in support of candidates than against as it would make more sense for individuals to fund those they support rather than donate to oppose another. What was interesting was that the same amount of money was donated against write-in candidates, who do not even appear on the ballot, as was against Conservatives and Libertarians suggesting that all three parties are considered equally threatening to donors of New York. 
+  b. The Democrats and Republicans received the greatest number of financial campaign contributions, as compared to other third parties. From this, more of the money was spent in support of candidates, rather than against them. This was as expected because, being the largest parties, the Democrats and Republicans would naturally receive the most money.
 
 
 3.
-  +a When considering both the graphs together, one can see that there is a positive relationship between the amount of donations received and the number of votes garnered for the Democrat, Republican, and Green parties. However, this does not apply for the other third parties. Conservatives, Libertarians and Write-ins received more donations than the Socialists, but the Socialists garnered more votes than both the Libertarians and Write-ins and about the same as the Conservatives. From this we see that there are other variables outside of campaign financing and historical trends that affect the number of votes candidates and parties receive. 
+  a. When considering both the graphs together, one can see that there is a positive relationship between the amount of donations received and the number of votes garnered for the Democrat, Republican, and Green parties. However, this does not apply for the other third parties. Conservatives, Libertarians and Write-ins received more donations than the Socialists, but the Socialists garnered more votes than both the Libertarians and Write-ins and about the same as the Conservatives. From this we see that there are other variables outside of campaign financing and historical trends that affect the number of votes candidates and parties receive. 
   
 Sources:
 
