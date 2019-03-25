@@ -20,7 +20,6 @@ Hypothesis:
   a. More donations will be made in favor of a candidate’s campaigns than against. 
   b. The Democrats followed by the Republicans would have received the most money. 
 
-
 3.
   a. Finally, there will be a positive correlation between the amount of money candidates receive in donations to use in support of their campaign and the overall votes they garner. 
 
