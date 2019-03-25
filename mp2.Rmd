@@ -1,7 +1,6 @@
 ---
 title: "Mini Project 2"
 author: "Vatsala, Emma, Margaret"
-date: "3/8/2019"
 output: html_document
 code_folding: hide
 ---
@@ -141,7 +140,10 @@ donations_df
 # function to iterate over any state or donation/transaction type
 ```
 
-
+```{r message = FALSE, echo = FALSE, warning = FALSE}
+library(devtools)
+devtools::install_github("benmarwick/wordcountaddin", type = "source", dependencies = TRUE)
+```
 
 
 
