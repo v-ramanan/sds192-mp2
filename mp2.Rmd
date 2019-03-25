@@ -146,9 +146,6 @@ devtools::install_github("benmarwick/wordcountaddin", type = "source", dependenc
 ```
 
 
-
-
-
 ^[https://github.com/v-ramanan/sds192-mp2.git]
 
 
