@@ -180,13 +180,16 @@ Analysis:
 
 3.
   +a When considering both the graphs together, one can see that there is a positive relationship between the amount of donations received and the number of votes garnered for the Democrat, Republican, and Green parties. However, this does not apply for the other third parties. Conservatives, Libertarians and Write-ins received more donations than the Socialists, but the Socialists garnered more votes than both the Libertarians and Write-ins and about the same as the Conservatives. From this we see that there are other variables outside of campaign financing and historical trends that affect the number of votes candidates and parties receive. 
+  
+Sources:
 
+Wheaton, Sarah. “New York: Not as Blue as it Could Be”, The New York Times,   27 July 2012, https://fivethirtyeight.blogs.nytimes.com/2012/07/27/new-york-  not-as-blue-as-it-could-be/
+
+“Who Votes, Who Doesn’t, and Why:Regular Voters, Intermittent Voters, and       Those Who Don't”, Pew Research Center, 18 October 2006,                       https://www.people-press.org/2006/10/18/who-votes-who-doesnt-and-why/
+
+Amadeo, Kimberly. “US Economy 2012: Summary and Critical Events”, The          Balance, 25 January 2019,https://www.thebalance.com/u-s-economy-2012-330574
 
 *^[https://github.com/v-ramanan/sds192-mp2.git]
-*^[Wheaton, Sarah. “New York: Not as Blue as it Could Be”, The New York Times, 27 July 2012, https://fivethirtyeight.blogs.nytimes.com/2012/07/27/new-york-not-as-blue-as-it-could-be/
-]
-*^[“Who Votes, Who Doesn’t, and Why:Regular Voters, Intermittent Voters, and Those Who Don't”, Pew Research Center, 18 October 2006, https://www.people-press.org/2006/10/18/who-votes-who-doesnt-and-why/]
-*^[Amadeo, Kimberly. “US Economy 2012: Summary and Critical Events”, The Balance, 25 January 2019,https://www.thebalance.com/u-s-economy-2012-330574
-]
+
 
 
